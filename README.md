@@ -12,7 +12,7 @@ A Python package which includes useful command-line tools for managing media fil
 
 ### Prerequisites
 
-The command-line tool, `clear-mkvchptnames`, included with the pyPlexUtils Python package requires the [Matroska tools](https://mkvtoolnix.download/) to be installed on your system and its set of command-line tools to be accessible from the shell PATH.
+The command-line tool, `clear-mkvchptnames`, included with this pyPlexUtils Python package requires the [Matroska tools](https://mkvtoolnix.download/) to be installed on your system.  The Matroska tools includes a set of command-line tools which should be accessible from the shell PATH upon installation.
 
 > On macOS, the Matroska tools can be installed using the [Homebrew](https://brew.sh/) package manager.  From the terminal, type `brew install mkvtoolnix` and press Enter.
 
