@@ -9,6 +9,6 @@ setup(
         author_email='joe@arauzo.net',
         license='GPLv3+',
         packages=['pyPlexUtils'],
-        install_requires=['Click','sh']
+        install_requires=['Click','sh'],
         zip_safe=False
 )
