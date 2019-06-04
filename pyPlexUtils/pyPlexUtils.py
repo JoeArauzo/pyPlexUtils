@@ -42,15 +42,18 @@ def clear_mkvchptnames(file, backupchapters, verbose):
         logger = initclogger(__name__, 'ERROR')
     logger.info(f"Executing CLEAR-MKVCHPTNAMES version {__version__}.")
 
-    # Exit if mkvtoolnix is not accessible
-    if (not sh.which('mkvextract')) or (not sh.which('mkvpropedit')):
-        sys.exit("MKVTOOLNIX is not accessible.  Please install.")
-
     # Exit if file does not exist
     mkvfile = Path(file).resolve()
     if not mkvfile.is_file():
-        sys.exit("The file specified does not exist.")
+        logger.error(f"The file '{mkvfile.name}' does not exist.")
+        sys.exit(1)
     
+    # Exit if mkvtoolnix is not accessible
+    if (not sh.which('mkvextract')) or (not sh.which('mkvpropedit')):
+        logger.error("The dependency, MKVTOOLNIX, is not accessible.  Please" +
+                     "install or check the PATH.")
+        sys.exit(2)
+
     # Export MKV chapters as temporary xml
     tmpxmlfile = datetime.today().strftime('%Y%m%dT%H%M%S') + '.xml'
     tmpxmlfile = mkvfile.parent / tmpxmlfile
@@ -60,10 +63,10 @@ def clear_mkvchptnames(file, backupchapters, verbose):
     except sh.ErrorReturnCode_2:
         logger.error(f"The file '{mkvfile.name}' could not be opened for " +
                      "reading.  Not a valid Matroska file.")
-        sys.exit(1)
+        sys.exit(3)
     except sh.ErrorReturnCode:
         logger.error("An unknown error occurred when executing mkvextract.")
-        sys.exit(1)
+        sys.exit(4)
 
     # Search temporary xml for chapter name matches
     xmlfileobj = open(tmpxmlfile, 'r')
@@ -71,7 +74,7 @@ def clear_mkvchptnames(file, backupchapters, verbose):
     xmlfileobj.close()
     matches = re.findall("(?<=<ChapterString>).+(?=</ChapterString>)", xmltext)
     namedchptqty = len(matches)
-    logger.info(f"{namedchptqty} chapters found.")
+    logger.info(f"({namedchptqty}) chapters found.")
 
     # Create backup xml if matches exist and --backup-chapters option is set
     if namedchptqty and backupchapters:
@@ -92,16 +95,16 @@ def clear_mkvchptnames(file, backupchapters, verbose):
         xmlfileobj.close()
         try:
             sh.mkvpropedit(mkvfile, '--chapters', tmpxmlfile)
-            click.echo(f"{namedchptqty} chapters have been successfully " + 
+            click.echo(f"({namedchptqty}) chapters have been successfully " + 
                         f"cleared from '{mkvfile.name}'.")
         except sh.ErrorReturnCode_2:
             logger.error(f"The file '{mkvfile.name}' could not be opened " +
                         "for writing.  Not a valid Matroska file.")
-            sys.exit(1)
+            sys.exit(5)
         except sh.ErrorReturnCode:
             logger.error("An unknown error occurred when executing " +
                          "mkvpropedit.")
-            sys.exit(1)
+            sys.exit(6)
     else:
         logger.info("No chapters to clear.")
     
