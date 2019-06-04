@@ -7,11 +7,16 @@ pkg_version = re.search(
     re.M
     ).group(1)
 
+
+with open("README.md", "rb") as f:
+    long_descr = f.read().decode("utf-8")
+
     
 setup(
         name='pyPlexUtils',
         version=pkg_version,
         description='Includes useful command-line tools for managing media files for use with Plex Media Server.',
+        long_description=long_descr,
         url='git@github.com:JoeArauzo/python-test-package.git',
         author='Joe Arauzo',
         author_email='joe@arauzo.net',

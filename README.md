@@ -38,5 +38,34 @@ $ pipx install --spec git+https://git@github.com/JoeArauzo/pyPlexUtils.git pyPle
 Once the package is installed, the following executable is available from the shell.
 
 ```sh
+CLEAR-MKVCHPTNAMES
+--------------------
+Usage: clear-mkvchptnames [OPTIONS] FILE
 
+  This command-line tool inspects the metadata of a Matroska (MKV) media
+  file for chapters and clears the names assigned to each chapter.  This is
+  to ensure interoperability with Plex Media Server (https://www.plex.tv)
+  which requires MKV chapter names to be unnamed.
+
+  Matroska tools (https://mkvtoolnix.download/) needs to already be
+  installed and accessible from the shell PATH in order for this tool to
+  run.
+
+Options:
+  -v, --verbose         Verbose output
+  -b, --backupchapters  Backup chapters as xml file.
+  --help                Show this message and exit.
 ```
+
+## Versioning
+
+- 0.1.0 — (2019-06-04) first release
+
+## Authors
+
+- Joe Arauzo - https://github.com/JoeArauzo
+
+## License
+
+GNU GENERAL PUBLIC LICENSE
+Version 3, 29 June 2007
