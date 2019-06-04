@@ -7,7 +7,7 @@
 import logging
 from pathlib import Path
 
-def initclogger(name):
+def initclogger(name, level):
     """This function sets up console logging and returns a logger object."""
 
     # Create a customer logger
@@ -16,7 +16,10 @@ def initclogger(name):
 
     # Create handlers
     c_handler = logging.StreamHandler()
-    c_handler.setLevel(logging.INFO)
+    if level == 'INFO':
+        c_handler.setLevel(logging.INFO)
+    else:
+        c_handler.setLevel(logging.ERROR)
 
     # Create formatters and add it to handlers
     c_formatter = logging.Formatter('%(levelname)s: %(message)s')

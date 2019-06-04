@@ -20,9 +20,10 @@ import os
 
 @click.command()
 @click.argument('file')
+@click.option('--verbose', '-v', is_flag=True, help="Verbose output")
 @click.option('--backupchapters', '-b', is_flag=True, 
               help="Backup chapters as xml file.")
-def clear_mkvchptnames(file, backupchapters):
+def clear_mkvchptnames(file, backupchapters, verbose):
     """
     This command-line tool inspects the metadata of a Matroska (MKV) media file
     for chapters and clears the names assigned to each chapter.  This is to
@@ -35,8 +36,11 @@ def clear_mkvchptnames(file, backupchapters):
     
     
     # Initialize logging and begin
-    logger = initclogger(__name__)
-    logger.info(f"Executing clearmkvcnames version {__version__}.")
+    if verbose:
+        logger = initclogger(__name__, 'INFO')
+    else:
+        logger = initclogger(__name__, 'ERROR')
+    logger.info(f"Executing CLEAR-MKVCHPTNAMES version {__version__}.")
 
     # Exit if mkvtoolnix is not accessible
     if (not sh.which('mkvextract')) or (not sh.which('mkvpropedit')):
@@ -88,8 +92,8 @@ def clear_mkvchptnames(file, backupchapters):
         xmlfileobj.close()
         try:
             sh.mkvpropedit(mkvfile, '--chapters', tmpxmlfile)
-            logger.info(f"{namedchptqty} chapters have been successfully " + 
-                        "cleared.")
+            click.echo(f"{namedchptqty} chapters have been successfully " + 
+                        f"cleared from '{mkvfile.name}'.")
         except sh.ErrorReturnCode_2:
             logger.error(f"The file '{mkvfile.name}' could not be opened " +
                         "for writing.  Not a valid Matroska file.")
@@ -110,8 +114,6 @@ def print_help_msg(command):
         click.echo(command.get_help(ctx))
 
 def main():
-    # print('See the following for usage:')
-    # print('  clear-mkvchptnames --help')
     click.echo('CLEAR-MKVCHPTNAMES')
     click.echo('--------------------')
     print_help_msg(clear_mkvchptnames)
