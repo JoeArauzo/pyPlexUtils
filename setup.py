@@ -1,8 +1,16 @@
+import re
 from setuptools import setup
 
+pkg_version = re.search(
+    '^__version__\s*=\s*"(.*)"',
+    open('pyPlexUtils/pyPlexUtils.py').read(),
+    re.M
+    ).group(1)
+
+    
 setup(
         name='pyPlexUtils',
-        version='0.0.1',
+        version=pkg_version,
         description='Includes useful command-line tools for managing media files for use with Plex Media Server.',
         url='git@github.com:JoeArauzo/python-test-package.git',
         author='Joe Arauzo',

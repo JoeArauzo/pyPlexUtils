@@ -7,6 +7,7 @@ A Python package which includes useful command-line tools for managing media fil
   - [Getting Started](#getting-started)
     - [Prerequisites](#prerequisites)
     - [Installation](#installation)
+    - [Usage](#usage)
 
 ## Getting Started
 
@@ -30,4 +31,12 @@ Here's how to install pyPlexUtils:
 
 ```sh
 $ pipx install --spec git+https://git@github.com/JoeArauzo/pyPlexUtils.git pyPlexUtils
+```
+
+### Usage
+
+Once the package is installed, the following executable is available from the shell.
+
+```sh
+
 ```
