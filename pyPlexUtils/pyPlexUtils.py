@@ -105,6 +105,13 @@ def clear_mkvchptnames(file, backupchapters):
     os.remove(tmpxmlfile)
 
 
+def print_help_msg(command):
+    with click.Context(command) as ctx:
+        click.echo(command.get_help(ctx))
+
 def main():
-    print('See the following for usage:')
-    print('  clear-mkvchptnames --help')
+    # print('See the following for usage:')
+    # print('  clear-mkvchptnames --help')
+    click.echo('CLEAR-MKVCHPTNAMES')
+    click.echo('--------------------')
+    print_help_msg(clear_mkvchptnames)
