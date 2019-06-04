@@ -10,5 +10,8 @@ setup(
         license='GPLv3+',
         packages=['pyPlexUtils'],
         install_requires=['Click','sh'],
+        entry_points = {
+                "console_scripts": ['clear-mkvchptnames = pyPlexUtils.pyPlexUtils:clear_mkvchptnames']
+                },
         zip_safe=False
 )
