@@ -17,7 +17,7 @@ setup(
         version=pkg_version,
         description='Includes useful command-line tools for managing media files for use with Plex Media Server.',
         long_description=long_descr,
-        url='git@github.com:JoeArauzo/python-test-package.git',
+        url='git@github.com:JoeArauzo/pyPlexUtils.git',
         author='Joe Arauzo',
         author_email='joe@arauzo.net',
         license='GPLv3+',
