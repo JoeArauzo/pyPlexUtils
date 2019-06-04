@@ -22,7 +22,7 @@ import os
 @click.argument('file')
 @click.option('--backupchapters', '-b', is_flag=True, 
               help="Backup chapters as xml file.")
-def main(file, backupchapters):
+def clear_mkvchptnames(file, backupchapters):
     """
     This command-line tool inspects the metadata of a Matroska (MKV) media file
     for chapters and clears the names assigned to each chapter.  This is to
@@ -103,3 +103,8 @@ def main(file, backupchapters):
     
     # Clean up
     os.remove(tmpxmlfile)
+
+
+def main():
+    print('See the following for usage:')
+    print('  clear-mkvchptnames --help')
