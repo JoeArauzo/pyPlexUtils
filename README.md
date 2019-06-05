@@ -8,6 +8,9 @@ A Python package which includes useful command-line tools for managing media fil
     - [Prerequisites](#prerequisites)
     - [Installation](#installation)
     - [Usage](#usage)
+  - [Versioning](#versioning)
+  - [Authors](#authors)
+  - [License](#license)
 
 ## Getting Started
 
