@@ -15,6 +15,7 @@ with open("README.md", "rb") as f:
 setup(
         name='pyPlexUtils',
         version=pkg_version,
+        python_requires='>=3.6',
         description='Includes useful command-line tools for managing media files for use with Plex Media Server.',
         long_description=long_descr,
         url='git@github.com:JoeArauzo/pyPlexUtils.git',
